@@ -1,13 +1,7 @@
-package odev;
 import java.io.*;
 
 
-/*
- * @author elif polatdemir
- * @ date 28.11.2024
- */
-
-public class Assignment4 {
+public class BankSystem {
 	
 	public static void main(String[] args) throws Exception {
 		
