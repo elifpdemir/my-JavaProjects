@@ -57,9 +57,9 @@ public class BankSystem {
 	
 	}
 	
-	//Metot, bir String parametre alacak. Bu parametre,
-	//dosyanın ismini (veya dosya yolunu) temsil eder.
-	//dosyadaki satır sayısı
+	/*The method will take a String parameter. 
+         This parameter represents the name of the file (or the file path).
+          the number of lines in the file*/
     public static int countAccounts(String filename) {
         int count = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -72,10 +72,10 @@ public class BankSystem {
         return count;
     }
 	
-	//dosya oku diziye koy
-	//boşluk karakterine göre okur
-	//Bu yöntemi çağırmadan önce dizilerin boyutunu 
-	//ayarlamak için countAccounts() yönteminden döndürülen değeri kullanabilirsiniz
+	//read file put into array
+	
+	//Before calling this method, set the size of the arrays
+	
 	public static void readAccountInfo(int[] acctNums, String[] names, String[] surnames, double[] balances, String filename) throws NumberFormatException, IOException {
 		 BufferedReader reader = new BufferedReader(new FileReader(filename));
 	        String line;
@@ -97,31 +97,31 @@ public class BankSystem {
 	public static boolean deposit(double[] balances, int index, double amount) {
 		
         if (isDepositValid(amount)) {
-            balances[index] += amount; // Hesap bakiyesini arttır
-            return true; // Başarılı
+            balances[index] += amount; // Increase account balance
+            return true; // Successful
         } else {
-            return false; // Geçersiz yatırım
+            return false; // invalid
         }
 	}
 	
 	public static boolean isDepositValid(double amount) {
-        return amount > 0; // Yatırım miktarı sıfırdan büyükse geçerlidir
+        return amount > 0; 
     }
 
 	
 	public static boolean withdrawal(double[] balances, int index, double amount) {
 		
         if (isWithdrawalValid(amount, balances[index])) {
-            balances[index] -= amount; // Hesap bakiyesini azalt
-            return true; // Başarılı
+            balances[index] -= amount; // decrease
+            return true; // succesful
         } else {
-            return false; // Geçersiz çekim
+            return false; //invalid
         }
     }
 
 	
 	public static boolean isWithdrawalValid(double amount, double balance) {
-        return amount > 0 && balance >= amount; // Yatırım miktarı sıfırdan büyük olmalı ve bakiye yeterli olmalı
+        return amount > 0 && balance >= amount; 
     }
 	
 	public static int transfer(int[] acctNums, double[] balances, int acctNumFrom, int acctNumTo, double amount) {
@@ -152,21 +152,21 @@ public class BankSystem {
 	
 	public static void writeAccountInfo(int[] acctNums, String[] names, String[] surnames, double[] balances, String filename) {
         try {
-            // Dosyaya yazmak için BufferedWriter nesnesi oluşturuyoruz
+           
             BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
             
-            // Array'ler üzerinde dönerek her bir hesap bilgisini dosyaya yazıyoruz
+          
             for (int i = 0; i < acctNums.length; i++) {
                 String accountInfo = acctNums[i] + " " + names[i] + " " + surnames[i] + " " + balances[i];
-                writer.write(accountInfo); // Hesap bilgisini dosyaya yaz
-                writer.newLine(); // Her hesap bilgisinden sonra yeni bir satıra geç
+                writer.write(accountInfo); 
+                writer.newLine();
             }
             
-            // Dosyayı kapatıyoruz
+          
             writer.close();
         } catch (IOException e) {
-            // Dosya yazma sırasında oluşan hataları yakalıyoruz
-            System.out.println("Dosyaya yazarken bir hata oluştu.");
+            
+            System.out.println("An error occurred while writing to the file.");
             e.printStackTrace();
         }
     }
